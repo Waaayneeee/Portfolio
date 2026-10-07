@@ -42,7 +42,6 @@ window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
         if (pageYOffset >= (sectionTop - 150)) {
             current = section.getAttribute('id');
         }
@@ -66,10 +65,11 @@ navLinks.forEach(link => {
     });
 });
 
-// Project Modal Functions
-function openProjectModal(title, desc) {
+// Project Modal Functions (Na-update para sa pagpapakita ng image preview)
+function openProjectModal(title, desc, imgSrc) {
     document.getElementById('modal-title').innerText = title;
     document.getElementById('modal-desc').innerText = desc;
+    document.getElementById('modal-img').src = imgSrc;
     document.getElementById('project-modal').classList.remove('hidden');
 }
 
@@ -119,11 +119,9 @@ if (chatForm) {
         const userText = chatInput.value.trim();
         if (!userText) return;
 
-        // Append User Message
         appendMessage(userText, 'user');
         chatInput.value = '';
 
-        // Simulate Bot Response after brief delay
         setTimeout(() => {
             const botReply = generateBotResponse(userText);
             appendMessage(botReply, 'bot');
@@ -143,15 +141,17 @@ function generateBotResponse(input) {
     const query = input.toLowerCase();
     
     if (query.includes('hello') || query.includes('hi')) {
-        return "Hello! I am the virtual assistant of John Wayne. Would you like to know anything about his skills or projects??";
+        return "Hello! I am the virtual assistant of John Wayne. Would you like to know anything about his skills, projects, or achievements?";
     } else if (query.includes('project') || query.includes('system')) {
-        return "He built Payroll & Employee Management System (PHP/MySQL) and Mine Game mini-game!";
+        return "He built the Payroll & Employee Management System (PHP/MySQL) and the BHW Viewing System!";
     } else if (query.includes('skill') || query.includes('language') || query.includes('code')) {
         return "His core skills are HTML/CSS, JavaScript, PHP, MySQL, and Git workflows.";
     } else if (query.includes('contact') || query.includes('email') || query.includes('reach')) {
-        return "You can contact him via email: maravewayne@gmail.com or the form below the portfolio.";
+        return "You can contact him via email at maravewayne@gmail.com or through the contact form below.";
     } else if (query.includes('age') || query.includes('who')) {
-        return "John Wayne Marave is 19 years old, studying BS Computer Science at Lipa City Colleges.";
+        return "John Wayne Marave is 19 years old, a BS Computer Science student at Lipa City Colleges, and serves as the JPCS Treasurer!";
+    } else if (query.includes('achievement') || query.includes('certificate')) {
+        return "He is active in academic excellence, serves as JPCS Treasurer, and has successfully deployed full-stack database systems!";
     } else {
         return "That's interesting! For other questions, you can direct them to Wayne via email or his social media links.";
     }
