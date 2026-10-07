@@ -1,10 +1,10 @@
 /* Inkberry & Peach Theme Variables */
 :root {
     --bg-light: #fbf9fb;
-    --bg-dark: #120f18; /* Inkberry Dark Base */
+    --bg-dark: #120f18;
     --card-light: #ffffff;
-    --card-dark: #191424; /* Deep Inkberry Card */
-    --accent: #ff9e7d; /* Peach Highlight */
+    --card-dark: #191424;
+    --accent: #ff9e7d;
     --accent-light: #ffb8a1;
     --accent-hover: #ff855f;
     --text-main-light: #1e1b24;
@@ -20,6 +20,22 @@ body.portfolio-body {
     color: var(--text-main-light);
     font-family: 'Plus Jakarta Sans', sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body.portfolio-body::before {
+    content: '';
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    opacity: 0.04;
+    pointer-events: none;
+    background-image: linear-gradient(#ff9e7d 1px, transparent 1px), linear-gradient(90deg, #ff9e7d 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: moveFullBackground 25s linear infinite;
+    z-index: -1;
 }
 
 html.dark body.portfolio-body {
@@ -27,7 +43,15 @@ html.dark body.portfolio-body {
     color: var(--text-main-dark);
 }
 
-/* Custom Scrollbar */
+html.dark body.portfolio-body::before {
+    opacity: 0.07;
+}
+
+@keyframes moveFullBackground {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+}
+
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -43,21 +67,20 @@ html.dark body.portfolio-body {
     background: #ff9e7d;
 }
 
-/* Header & Navigation UI */
 .portfolio-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 50;
-    background-color: rgba(251, 249, 251, 0.9);
+    background-color: rgba(251, 249, 251, 0.85);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 158, 125, 0.2);
     transition: all 0.3s ease;
 }
 
 html.dark .portfolio-header {
-    background-color: rgba(18, 15, 24, 0.9);
+    background-color: rgba(18, 15, 24, 0.85);
 }
 
 .nav-container {
@@ -85,7 +108,7 @@ html.dark .portfolio-header {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.75rem;
     font-size: 0.75rem;
     font-weight: 700;
     font-family: 'Space Mono', monospace;
@@ -100,7 +123,6 @@ html.dark .portfolio-header {
     color: var(--accent);
 }
 
-/* Active Nav Underline Effect */
 .nav-links a.active {
     color: var(--accent);
 }
@@ -116,7 +138,6 @@ html.dark .portfolio-header {
     border-radius: 2px;
 }
 
-/* Mobile active link style */
 #mobile-menu a.active {
     color: var(--accent);
     border-left: 3px solid var(--accent);
@@ -171,22 +192,11 @@ html.dark .portfolio-header {
     border-color: var(--accent);
 }
 
-/* Hero Section UI */
 .hero-section {
     position: relative;
     padding-top: 9rem;
     padding-bottom: 6rem;
     overflow: hidden;
-    background: radial-gradient(circle at 10% 20%, rgba(255, 158, 125, 0.08) 0%, transparent 50%);
-}
-
-.hero-bg-grid {
-    position: absolute;
-    inset: 0;
-    opacity: 0.05;
-    pointer-events: none;
-    background-image: linear-gradient(#ff9e7d 1px, transparent 1px), linear-gradient(90deg, #ff9e7d 1px, transparent 1px);
-    background-size: 32px 32px;
 }
 
 .hero-badge {
@@ -243,7 +253,6 @@ html.dark .portfolio-header {
     justify-content: center;
 }
 
-/* Profile Picture Hover Animation */
 .hero-avatar-frame img {
     transition: transform 0.5s ease, filter 0.5s ease, box-shadow 0.5s ease;
 }
@@ -254,11 +263,9 @@ html.dark .portfolio-header {
     box-shadow: 0 0 25px rgba(255, 158, 125, 0.6);
 }
 
-/* Sections General */
 .section-container {
     padding: 6rem 0;
     border-top: 1px solid rgba(255, 158, 125, 0.15);
-    transition: background-color 0.3s;
 }
 
 .section-title-wrapper {
@@ -282,16 +289,6 @@ html.dark .portfolio-header {
     margin-top: 0.5rem;
 }
 
-.section-bar {
-    width: 3rem;
-    height: 0.25rem;
-    background-color: var(--accent);
-    margin: 1rem auto 0 auto;
-    border-radius: 2px;
-    box-shadow: 0 0 10px rgba(255, 158, 125, 0.5);
-}
-
-/* Cards & UI Elements */
 .info-card, .competency-box, .skill-card, .project-card, .contact-info-card, .contact-form-box {
     background-color: var(--card-light);
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -309,7 +306,6 @@ html.dark .info-card, html.dark .competency-box, html.dark .skill-card, html.dar
     padding: 1.25rem;
 }
 
-/* Custom Hover Effects for Education and JPCS Officer Info Cards */
 .info-card:hover {
     border-color: var(--accent);
     transform: translateY(-6px) scale(1.02);
@@ -323,13 +319,76 @@ html.dark .info-card, html.dark .competency-box, html.dark .skill-card, html.dar
     overflow: hidden;
 }
 
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.achievement-img-card {
+    background-color: var(--card-light);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+html.dark .achievement-img-card {
+    background-color: var(--card-dark);
+    border-color: rgba(255, 158, 125, 0.2);
+}
+
+.achievement-img-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    background-color: #120f18;
+}
+
+.achievement-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.3s ease;
+}
+
+.achievement-content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.achievement-title {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.achievement-issuer {
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+}
+
+.achievement-desc {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
 .skill-card {
     padding: 1.75rem;
 }
 .skill-card:hover {
     border-color: var(--accent);
     transform: translateY(-4px);
-    box-shadow: 0 0 20px rgba(255, 158, 125, 0.15);
 }
 
 .skill-icon {
@@ -345,11 +404,6 @@ html.dark .info-card, html.dark .competency-box, html.dark .skill-card, html.dar
     font-weight: 700;
     margin-bottom: 1.25rem;
     border: 1px solid rgba(255, 158, 125, 0.2);
-    transition: all 0.3s;
-}
-.skill-card:hover .skill-icon {
-    background-color: var(--accent);
-    color: #120f18;
 }
 
 .project-card {
@@ -387,7 +441,6 @@ html.dark .info-card, html.dark .competency-box, html.dark .skill-card, html.dar
     font-family: 'Space Mono', monospace;
 }
 
-/* Contact UI */
 .contact-info-card {
     padding: 1rem 1.25rem;
     display: flex;
@@ -429,9 +482,7 @@ html.dark .social-icon-btn {
 .social-icon-btn:hover {
     background-color: var(--accent);
     color: #120f18;
-    border-color: var(--accent);
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 10px 20px rgba(255, 158, 125, 0.3);
 }
 
 .contact-form-box {
@@ -446,7 +497,6 @@ html.dark .social-icon-btn {
     border: 1px solid rgba(0, 0, 0, 0.15);
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 0.85rem;
-    transition: border-color 0.2s;
 }
 html.dark .form-input {
     background-color: #120f18;
@@ -456,10 +506,8 @@ html.dark .form-input {
 .form-input:focus {
     outline: none;
     border-color: var(--accent);
-    box-shadow: 0 0 10px rgba(255, 158, 125, 0.2);
 }
 
-/* AI Chatbot Widget Styles */
 .chatbot-toggle-btn {
     position: fixed;
     bottom: 2rem;
@@ -477,11 +525,6 @@ html.dark .form-input {
     z-index: 100;
     cursor: pointer;
     border: 2px solid #fff;
-    transition: transform 0.3s ease, background-color 0.2s;
-}
-.chatbot-toggle-btn:hover {
-    transform: scale(1.1);
-    background-color: var(--accent-hover);
 }
 
 .chatbot-window {
@@ -499,12 +542,9 @@ html.dark .form-input {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: all 0.3s ease;
 }
 html.dark .chatbot-window {
     background-color: var(--card-dark);
-    border-color: rgba(255, 158, 125, 0.3);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
 .chatbot-header {
@@ -537,7 +577,6 @@ html.dark .chatbot-window {
     background-color: rgba(255, 158, 125, 0.15);
     color: var(--text-main-light);
     align-self: flex-start;
-    border-bottom-left-radius: 0;
 }
 html.dark .chat-bubble.bot {
     color: var(--text-main-dark);
@@ -546,7 +585,6 @@ html.dark .chat-bubble.bot {
     background-color: var(--accent);
     color: #120f18;
     align-self: flex-end;
-    border-bottom-right-radius: 0;
     font-weight: 700;
 }
 
@@ -555,8 +593,4 @@ html.dark .chat-bubble.bot {
     border-top: 1px solid rgba(255, 158, 125, 0.2);
     display: flex;
     gap: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.02);
-}
-html.dark .chatbot-footer {
-    background-color: rgba(0, 0, 0, 0.2);
 }
