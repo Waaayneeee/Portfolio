@@ -15,6 +15,14 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Global Hover Scale Animation Class for Mouse Interactive Elements */
+.hover-scale {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hover-scale:hover {
+    transform: scale(1.03);
+}
+
 body.portfolio-body {
     background-color: var(--bg-light);
     color: var(--text-main-light);
@@ -115,12 +123,13 @@ html.dark .portfolio-header {
 }
 .nav-links a {
     color: #887e94;
-    transition: color 0.2s;
+    transition: color 0.2s, transform 0.3s;
     position: relative;
     padding-bottom: 4px;
 }
 .nav-links a:hover {
     color: var(--accent);
+    transform: scale(1.1);
 }
 
 .nav-links a.active {
@@ -150,10 +159,9 @@ html.dark .portfolio-header {
     background-color: rgba(255, 158, 125, 0.1);
     border: 1px solid rgba(255, 158, 125, 0.3);
     color: var(--accent);
-    transition: transform 0.2s;
 }
 .theme-btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
 .nav-cta, .primary-btn {
@@ -174,7 +182,7 @@ html.dark .portfolio-header {
 .nav-cta:hover, .primary-btn:hover {
     background-color: var(--accent-hover);
     box-shadow: 0 0 25px rgba(255, 158, 125, 0.5);
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.05);
 }
 
 .secondary-btn {
@@ -190,6 +198,7 @@ html.dark .portfolio-header {
 .secondary-btn:hover {
     background-color: rgba(255, 158, 125, 0.15);
     border-color: var(--accent);
+    transform: scale(1.05);
 }
 
 .hero-section {
@@ -211,6 +220,9 @@ html.dark .portfolio-header {
     font-size: 0.75rem;
     font-weight: 700;
     font-family: 'Space Mono', monospace;
+}
+.hero-badge:hover {
+    transform: scale(1.05);
 }
 
 .hero-title {
@@ -257,8 +269,8 @@ html.dark .portfolio-header {
     transition: transform 0.5s ease, filter 0.5s ease, box-shadow 0.5s ease;
 }
 
-.hero-avatar-frame img:hover {
-    transform: scale(1.05) rotate(2deg);
+.hero-avatar-frame:hover img {
+    transform: scale(1.08) rotate(2deg);
     filter: contrast(115%) brightness(1.1);
     box-shadow: 0 0 25px rgba(255, 158, 125, 0.6);
 }
@@ -294,7 +306,7 @@ html.dark .portfolio-header {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 html.dark .info-card, html.dark .competency-box, html.dark .skill-card, html.dark .project-card, html.dark .contact-info-card, html.dark .contact-form-box {
     background-color: var(--card-dark);
@@ -306,11 +318,10 @@ html.dark .info-card, html.dark .competency-box, html.dark .skill-card, html.dar
     padding: 1.25rem;
 }
 
-.info-card:hover {
+.info-card:hover, .competency-box:hover, .skill-card:hover, .project-card:hover, .contact-info-card:hover, .contact-form-box:hover {
     border-color: var(--accent);
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 10px 30px rgba(255, 158, 125, 0.25);
-    background: linear-gradient(135deg, var(--card-dark) 0%, rgba(255, 158, 125, 0.08) 100%);
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 12px 35px rgba(255, 158, 125, 0.25);
 }
 
 .competency-box {
@@ -332,7 +343,7 @@ html.dark .info-card, html.dark .competency-box, html.dark .skill-card, html.dar
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
 }
@@ -340,6 +351,12 @@ html.dark .info-card, html.dark .competency-box, html.dark .skill-card, html.dar
 html.dark .achievement-img-card {
     background-color: var(--card-dark);
     border-color: rgba(255, 158, 125, 0.2);
+}
+
+.achievement-img-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    border-color: var(--accent);
+    box-shadow: 0 15px 35px rgba(255, 158, 125, 0.25);
 }
 
 .achievement-img-wrapper {
@@ -357,6 +374,11 @@ html.dark .achievement-img-card {
     transition: transform 0.5s ease, filter 0.3s ease;
 }
 
+.achievement-img-card:hover .achievement-img-wrapper img {
+    transform: scale(1.12);
+    filter: brightness(1.05);
+}
+
 .achievement-content {
     padding: 1.25rem;
     display: flex;
@@ -368,6 +390,11 @@ html.dark .achievement-img-card {
 .achievement-title {
     font-size: 1rem;
     font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.achievement-img-card:hover .achievement-title {
+    color: var(--accent);
 }
 
 .achievement-issuer {
@@ -386,10 +413,6 @@ html.dark .achievement-img-card {
 .skill-card {
     padding: 1.75rem;
 }
-.skill-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
-}
 
 .skill-icon {
     width: 3rem;
@@ -404,6 +427,10 @@ html.dark .achievement-img-card {
     font-weight: 700;
     margin-bottom: 1.25rem;
     border: 1px solid rgba(255, 158, 125, 0.2);
+    transition: transform 0.3s ease;
+}
+.skill-card:hover .skill-icon {
+    transform: scale(1.15) rotate(5deg);
 }
 
 .project-card {
@@ -482,7 +509,7 @@ html.dark .social-icon-btn {
 .social-icon-btn:hover {
     background-color: var(--accent);
     color: #120f18;
-    transform: translateY(-5px) scale(1.05);
+    transform: translateY(-5px) scale(1.15);
 }
 
 .contact-form-box {
@@ -497,6 +524,7 @@ html.dark .social-icon-btn {
     border: 1px solid rgba(0, 0, 0, 0.15);
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 0.85rem;
+    transition: all 0.3s ease;
 }
 html.dark .form-input {
     background-color: #120f18;
@@ -506,6 +534,7 @@ html.dark .form-input {
 .form-input:focus {
     outline: none;
     border-color: var(--accent);
+    transform: scale(1.02);
 }
 
 .chatbot-toggle-btn {
@@ -525,6 +554,9 @@ html.dark .form-input {
     z-index: 100;
     cursor: pointer;
     border: 2px solid #fff;
+}
+.chatbot-toggle-btn:hover {
+    transform: scale(1.12);
 }
 
 .chatbot-window {
@@ -572,6 +604,10 @@ html.dark .chatbot-window {
     border-radius: 0.5rem;
     max-width: 85%;
     line-height: 1.4;
+    transition: transform 0.2s ease;
+}
+.chat-bubble:hover {
+    transform: scale(1.02);
 }
 .chat-bubble.bot {
     background-color: rgba(255, 158, 125, 0.15);
