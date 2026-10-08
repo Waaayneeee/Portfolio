@@ -65,7 +65,7 @@ navLinks.forEach(link => {
     });
 });
 
-// Project Modal Functions (Na-update para sa pagpapakita ng image preview)
+// Project Modal Functions
 function openProjectModal(title, desc, imgSrc) {
     document.getElementById('modal-title').innerText = title;
     document.getElementById('modal-desc').innerText = desc;
@@ -131,7 +131,7 @@ if (chatForm) {
 
 function appendMessage(text, sender) {
     const bubble = document.createElement('div');
-    bubble.className = `chat-bubble ${sender}`;
+    bubble.className = `chat-bubble ${sender} hover-scale`;
     bubble.innerText = text;
     chatBody.appendChild(bubble);
     chatBody.scrollTop = chatBody.scrollHeight;
